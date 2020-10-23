@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    image: opt-dev:full
+    volumes:
+      - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python:/opentelemetry-python"
