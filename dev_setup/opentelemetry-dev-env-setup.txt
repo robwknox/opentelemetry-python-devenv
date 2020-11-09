@@ -1,0 +1,85 @@
+-----------------------------------------
+Host System setup
+-----------------------------------------
+Installs:
+ - git							https://git-scm.com/download/win
+ - docker (Docker Desktop)		https://www.docker.com/products/docker-desktop
+ - Pycharm						https://www.jetbrains.com/pycharm/download/#section=windows
+ - Cmder console emulator		https://cmder.net/
+ - Notepad++					https://notepad-plus-plus.org/downloads/
+
+
+Configs:
+
+Pycharm (my documents / pycharm_settings.zip)
+ - Settings / Keymap / Window / Editor Tabs / Close --> Ctrl+W  
+ - Settings / Editor / Code Style / Python / Wrapping and Braces / Hard wrap at: 79
+ - Settings / Editor / General / Move code fragments with drag-and-drop [ ]
+
+Cmder (my documents / cmder_settings.xml)
+ - Startup
+   - Tasks, new:
+     - name: {git::bash}
+	 - command: "C:\Program Files\Git\bin\sh.exe" -l -new_console:d:%USERPROFILE%
+   - Startup option: Specified named task: {git::bash}
+ - General:
+   - Size & Pos:
+	 - Long console output: 10000
+   - Appearance:
+     - Scrollbar: show
+
+
+-----------------------------------------
+Git checkouts
+-----------------------------------------
+
+mkdir opentelemetry
+cd opentelemetry
+git clone https://github.com/robwknox/opentelemetry-python-devenv.git
+
+mkdir src/opentelemetry-python
+cd src/opentelemetry-python
+git clone https://github.com/open-telemetry/opentelemetry-python
+
+mkdir opentelemetry-python-contrib
+cd opentelemetry-python-contrib/
+git clone https://github.com/open-telemetry/opentelemetry-python-contrib.git
+git co 5c9e043d6921550d82668788e3758a733fb11cb8
+
+
+-----------------------------------------
+Docker image build
+-----------------------------------------
+See:
+ - opentelemetry/dev-full.Dockerfile
+ - opentelemetry/docker-compose.yml
+ 
+ 
+-----------------------------------------
+Docker run manually
+-----------------------------------------
+
+docker run -it --rm
+ -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-sdk:/opentelemetry-python/opentelemetry-sdk"
+ -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-api:/opentelemetry-python/opentelemetry-api"
+ -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-python-contrib:/opentelemetry-python/opentelemetry-python-contrib"
+ -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/exporter:/opentelemetry-python/exporter"
+ -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/pyproject.toml:/opentelemetry-python/pyproject.toml"
+ -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/.flake8:/opentelemetry-python/.flake8"
+ -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/.pylintrc:/opentelemetry-python/.pylintrc"
+ opt-dev:full //bin/bash
+ 
+
+-----------------------------------------
+Pycharm Configuration
+-----------------------------------------
+
+Python Interpreter (Project Default):
+ - Name: Remote Python 3.9.0 Docker Compose
+ - Type: Docker Compose
+ - Server: Docker
+ - Configuration File: ./docker-compose.yml
+ - Service: dev
+ 
+Run/debug configurations:
+ - Docker w/ compose file (docker-compose.yml)
