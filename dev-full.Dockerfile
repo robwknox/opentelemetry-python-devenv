@@ -24,5 +24,3 @@ COPY src/opentelemetry-python /opentelemetry-python
 WORKDIR /opentelemetry-python
 
 RUN python scripts/eachdist.py develop
-
-#RUN tox --notest
