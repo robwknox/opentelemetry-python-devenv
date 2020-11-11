@@ -11,6 +11,9 @@ Installs:
 
 Configs:
 
+Docker for Desktop:
+ - Expose daemon on tcp://localhost:2375 without TLS so that Pycharm can access it
+
 Pycharm (my documents / pycharm_settings.zip)
  - Settings / Keymap / Window / Editor Tabs / Close --> Ctrl+W  
  - Settings / Editor / Code Style / Python / Wrapping and Braces / Hard wrap at: 79
@@ -83,3 +86,17 @@ Python Interpreter (Project Default):
  
 Run/debug configurations:
  - Docker w/ compose file (docker-compose.yml)
+
+
+-----------------------------------------
+Misc
+-----------------------------------------
+
+Local dev zipkin server:
+Run:
+ - docker run -d -p 9411:9411 openzipkin/zipkin-slim
+ - docker run -d -p 9411:9411 openzipkin/zipkin
+View:
+ - http://localhost:9411/zipkin/
+
+

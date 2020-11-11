@@ -3,7 +3,5 @@ services:
   dev:
     build:
       context: .
-      dockerfile: dev-full.Dockerfile
-    image: opt-dev:full
-    volumes:
-      - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python:/opentelemetry-python"
+      dockerfile: dev-min.Dockerfile
+    image: opt-dev:test
