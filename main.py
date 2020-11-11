@@ -1,1 +1,1 @@
-from opentelemetry.exporter.zipkin
+from opentelemetry.exporter.zipkin.version import 
