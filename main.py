@@ -10,13 +10,55 @@ from opentelemetry.sdk.trace.export import (
     ConsoleSpanExporter,
     SimpleExportSpanProcessor
 )
+from thrift.transport.TTransport import TMemoryBuffer
+from thrift.protocol import TBinaryProtocol
+from thrift.protocol import T
+import random
+from opentelemetry.trace.ids_generator import RandomIdsGenerator
+from struct import pack
 
 if __name__ == '__main__':
+
+    #
+    # gen = RandomIdsGenerator()
+    #
+    # # for iter in range(1, 128):
+    #     # gen_id = gen.generate_trace_id()
+    # gen_id = gen.generate_span_id()
+    # print(type(gen_id))
+    # print(f'{gen_id:40d} | {gen_id.bit_length():3d} | {bin(gen_id):128s}')
+    # packed = pack("!q", gen_id)
+    #
+    #
+    # exit(0)
+    #
+
+    #
+    # print("37 : ", bin(-37), " : ", bin(-37).lstrip('-0b'))
+    # print("37 : ", bin(37), " : ", bin(37).lstrip('-0b'))
+    #
+    # txt = ",,,,,ssaaww.....banana"
+    #
+    # print(txt, " : ", txt.lstrip(",.asw"))
+    #
+    # exit(0)
+    #
+
+    # for iter in range(1, 128):
+    #     rand_num = random.getrandbits(iter)
+    #     print(iter, " : ", rand_num.bit_length(), " : ", rand_num)
+    #
+    # exit(0)
 
 
     trace.set_tracer_provider(TracerProvider())
     trace.get_tracer_provider().add_span_processor(
         SimpleExportSpanProcessor(
+            ZipkinSpanExporter(
+                "thrift",
+                "http://host.docker.internal:9411/api/v1/spans",
+                encoding=Encoding.THRIFT
+            ),
             # ZipkinSpanExporter(
             #     "protobuf",
             #     "http://host.docker.internal:9411/api/v2/spans",
@@ -25,11 +67,11 @@ if __name__ == '__main__':
             # ZipkinSpanExporter(
             #     "json-v2", "http://host.docker.internal:9411/api/v2/spans",
             # ),
-            ZipkinSpanExporter(
-                "json-v1",
-                "http://host.docker.internal:9411/api/v1/spans",
-                encoding=Encoding.JSON_V1
-            ),
+            # ZipkinSpanExporter(
+            #     "json-v1",
+            #     "http://host.docker.internal:9411/api/v1/spans",
+            #     encoding=Encoding.JSON_V1
+            # ),
             # ZipkinSpanExporter(
             #     LocalEndpoint(
             #         "json",

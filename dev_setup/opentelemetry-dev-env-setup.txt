@@ -31,7 +31,6 @@ Cmder (my documents / cmder_settings.xml)
    - Appearance:
      - Scrollbar: show
 
-
 -----------------------------------------
 Git checkouts
 -----------------------------------------
@@ -49,19 +48,26 @@ cd opentelemetry-python-contrib/
 git clone https://github.com/open-telemetry/opentelemetry-python-contrib.git
 git co 5c9e043d6921550d82668788e3758a733fb11cb8
 
+-----------------------------------------
+Host System - python
+-----------------------------------------
+
+cd ~/PycharmProjects/opentelemetry/
+python -m venv .venv/dev_reqs
+.venv/dev_reqs/Scripts/pip install -r ~/PycharmProjects/opentelemetry/local-dev-requirements.txt
+
 
 -----------------------------------------
 Docker image build
 -----------------------------------------
-See:
- - opentelemetry/dev-full.Dockerfile
- - opentelemetry/docker-compose.yml
- 
- 
+Refer to docker/ dir
+
 -----------------------------------------
 Docker run manually
 -----------------------------------------
+Refer to compose yml files in docker/
 
+Example:
 docker run -it --rm
  -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-sdk:/opentelemetry-python/opentelemetry-sdk"
  -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-api:/opentelemetry-python/opentelemetry-api"

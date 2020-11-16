@@ -1,7 +1,0 @@
-version: "3.8"
-services:
-  dev:
-    build:
-      context: .
-      dockerfile: dev-min.Dockerfile
-    image: opt-dev:test
