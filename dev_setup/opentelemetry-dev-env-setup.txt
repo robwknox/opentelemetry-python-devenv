@@ -18,6 +18,15 @@ Pycharm (my documents / pycharm_settings.zip)
  - Settings / Keymap / Window / Editor Tabs / Close --> Ctrl+W  
  - Settings / Editor / Code Style / Python / Wrapping and Braces / Hard wrap at: 79
  - Settings / Editor / General / Move code fragments with drag-and-drop [ ]
+ - Settings / Tools / External Tools
+    - Black (https://black.readthedocs.io/en/stable/editor_integration.html)
+       - Program: C:\Users\robwk\PycharmProjects\openTelemetry\.venv\dev_reqs\Scripts\black.exe
+       - Args: --config $ProjectFileDir$/src/opentelemetry-python/pyproject.toml $ProjectFileDir$/src/opentelemetry-python/
+       - Working dir: C:\Users\robwk\PycharmProjects\openTelemetry\.venv\dev_reqs\Scripts
+    - Pylint (https://www.jetbrains.com/help/pycharm/configuring-third-party-tools.html)
+       - Program: docker
+       - Args: run --rm -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python:/opentelemetry-python" dev/otel/pylint:python3 /pylint-path-fix.sh $FileDirRelativeToProjectRoot$
+       - Working dir: C:\Users\robwk\PycharmProjects\openTelemetry\.venv\dev_reqs\Scripts
 
 Cmder (my documents / cmder_settings.xml)
  - Startup
@@ -56,7 +65,6 @@ cd ~/PycharmProjects/opentelemetry/
 python -m venv .venv/dev_reqs
 .venv/dev_reqs/Scripts/pip install -r ~/PycharmProjects/opentelemetry/local-dev-requirements.txt
 
-
 -----------------------------------------
 Docker image build
 -----------------------------------------
@@ -78,21 +86,6 @@ docker run -it --rm
  -v "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/.pylintrc:/opentelemetry-python/.pylintrc"
  opt-dev:full //bin/bash
  
-
------------------------------------------
-Pycharm Configuration
------------------------------------------
-
-Python Interpreter (Project Default):
- - Name: Remote Python 3.9.0 Docker Compose
- - Type: Docker Compose
- - Server: Docker
- - Configuration File: ./docker-compose.yml
- - Service: dev
- 
-Run/debug configurations:
- - Docker w/ compose file (docker-compose.yml)
-
 
 -----------------------------------------
 Misc
