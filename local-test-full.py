@@ -1,12 +1,12 @@
-from opentelemetry import trace
+from opentelemetry import metrics, trace
 from opentelemetry.exporter.zipkin import ZipkinSpanExporter
 from opentelemetry.exporter.zipkin.encoder import Encoding
 from opentelemetry.exporter.zipkin.encoder.v1.json import JsonV1Encoder
-from opentelemetry.exporter.zipkin.encoder.v1.thrift import ThriftEncoder
+# from opentelemetry.exporter.zipkin.encoder.v1.thrift import ThriftEncoder
 from opentelemetry.exporter.zipkin.encoder.v2.json import JsonV2Encoder
 from opentelemetry.exporter.zipkin.encoder.v2.protobuf import ProtobufEncoder
-from opentelemetry.exporter.zipkin.endpoint import Endpoint
 from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.metrics import MeterProvider
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import (
     BatchExportSpanProcessor,
@@ -18,12 +18,33 @@ from thrift.transport.TTransport import TMemoryBuffer
 from thrift.protocol import TBinaryProtocol
 import random
 from opentelemetry.trace.ids_generator import RandomIdsGenerator
-from opentelemetry.exporter.zipkin.encoder.v1.thrift import ThriftRandomIdsGenerator
+# from opentelemetry.exporter.zipkin.encoder.v1.thrift import ThriftRandomIdsGenerator
 from struct import pack, unpack
 import sys
 import time
+import ipaddress
 
 if __name__ == '__main__':
+
+    headers = "a=b"
+    print(headers)
+    print("headers: '", headers, "'")
+
+    headers_dict = {}
+    for header in headers.split(","):
+        for header_parts in header.split("="):
+            if len(header_parts) == 2:
+                headers_dict[header_parts[0]] = header_parts[1]
+            else:
+                print(
+                    "Invalid OTLP exporter header skipped: %r" % header
+                )
+    print(headers_dict)
+    exit(0)
+
+    #
+    # metrics.set_meter_provider(MeterProvider())
+    # metrics.get_meter_provider().
 
     trace.set_tracer_provider(TracerProvider(
         # ids_generator=ThriftRandomIdsGenerator()
@@ -33,48 +54,34 @@ if __name__ == '__main__':
             ZipkinSpanExporter(
                 "thrift",
                 "http://host.docker.internal:9411/api/v1/spans",
-                encoding=Encoding.THRIFT
+                encoding=Encoding.V1_THRIFT
             ),
-            #
+
             # ZipkinSpanExporter(
             #     "protobuf",
             #     "http://host.docker.internal:9411/api/v2/spans",
-            #     encoding=Encoding.PROTOBUF,
-            #     encoder=ProtobufEncoder(
-            #         Endpoint(
-            #             "protobuf-2",
-            #             ipv4="192.168.0.1",
-            #             ipv6="2001:db8::c001",
-            #             port=41412
-            #         )
-            #     )
+            #     encoding=Encoding.V2_PROTOBUF,
+            #     local_node_ipv4="192.168.0.1",
+            #     local_node_ipv6="2001:db8::c001",
+            #     local_node_port=41412,
             # ),
 
             # ZipkinSpanExporter(
-            #     endpoint="http://host.docker.internal:9411/api/v2/spans",
-            #     encoder=JsonV2Encoder(
-            #         Endpoint(
-            #             "json-v2",
-            #             ipv4="192.168.0.1",
-            #             ipv6="2001:db8::c001",
-            #             port=41412
-            #         ),
-            #     ),
-            # ),
-            #
-            # ZipkinSpanExporter(
-            #     endpoint="http://host.docker.internal:9411/api/v1/spans",
-            #     encoder=JsonV1Encoder(
-            #         Endpoint(
-            #             "json-v1",
-            #             ipv4="192.168.0.1",
-            #             # ipv6="2001:db8::c001",
-            #             port=41412
-            #         ),
-            #     ),
-            #     encoding=Encoding.JSON_V1
+            #     "json-v2",
+            #     "http://host.docker.internal:9411/api/v2/spans",
+            #     local_node_ipv4="192.168.0.1",
+            #     local_node_ipv6="2001:db8::c001",
+            #     local_node_port=41412,
             # ),
 
+            # ZipkinSpanExporter(
+            #     "json-v1",
+            #     "http://host.docker.internal:9411/api/v1/spans",
+            #     encoding=Encoding.V1_JSON,
+            #     local_node_ipv4="192.168.0.1",
+            #     local_node_ipv6="2001:db8::c001",
+            #     local_node_port=41412,
+            # ),
         )
     )
 

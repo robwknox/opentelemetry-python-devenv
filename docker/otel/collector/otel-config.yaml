@@ -1,0 +1,52 @@
+extensions:
+  health_check:
+  pprof:
+    endpoint: 0.0.0.0:1777
+  zpages:
+    endpoint: 0.0.0.0:55679
+
+receivers:
+  otlp:
+    protocols:
+      http:
+      grpc:
+        tls_settings:
+          cert_file: /root/service.pem
+          key_file: /root/service.key
+#  otlp/mtls:
+#    protocols:
+#      grpc:
+#        client_ca_file: client.pem
+#        endpoint: mysite.local:55690
+#        tls_settings:
+#          cert_file: server.crt
+#          key_file: server.key
+#  otlp/notls:
+#    protocols:
+#      grpc:
+#        endpoint: mysite.local:55690
+
+processors:
+  batch:
+
+exporters:
+  logging:
+    logLevel: debug
+  zipkin:
+    endpoint: "http://host.docker.internal:9411/api/v2/spans"
+
+service:
+
+  pipelines:
+
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, zipkin]
+
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging]
+
+  extensions: [health_check, pprof, zpages]

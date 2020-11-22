@@ -3,8 +3,8 @@ services:
   dev:
     build:
       context: .
-      dockerfile: python3.9.0.Dockerfile
-    image: dev/otel/all/install:python3.9.0
+      dockerfile: all-install_python3.5.10.Dockerfile
+    image: dev/otel/all/install:python3.5.10
     volumes:
       - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-sdk/src/opentelemetry/:/opentelemetry-python/opentelemetry-sdk/src/opentelemetry/"
       - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-api/src/opentelemetry/:/opentelemetry-python/opentelemetry-api/src/opentelemetry/"

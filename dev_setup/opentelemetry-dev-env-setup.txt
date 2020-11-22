@@ -66,14 +66,15 @@ python -m venv .venv/dev_reqs
 .venv/dev_reqs/Scripts/pip install -r ~/PycharmProjects/opentelemetry/local-dev-requirements.txt
 
 -----------------------------------------
-Docker image build
+Docker images / docker compose
 -----------------------------------------
-Refer to docker/ dir
-
------------------------------------------
-Docker run manually
------------------------------------------
-Refer to compose yml files in docker/
+Refer to docker/
+Images:
+ - dev/otel/test-suite:all                  used to do manual (not through IDE) full tox runs against all python versions
+ - dev/otel/all/install:{python_ver}        all OTEL pkgs installed via "eachdist.py install". Useful for when autocompletion
+                                            off OTEL packages is needed or debugging
+ - dev/otel/pylint:python3                  for wiring up to IDE for linting
+ - dev/otel/exporter/zipkin|otlp            for debugging against specific exporters
 
 Example:
 docker run -it --rm
@@ -99,3 +100,10 @@ View:
  - http://localhost:9411/zipkin/
 
 
+-----------------------------------------
+TLS cert generation
+-----------------------------------------
+
+docker run -it --rm -v "//c/Users/robwk/PycharmProjects/openTelemetry/docker/util/certs/gen:/root/gen" dev/util/cert-gen:latest
+
+Then use (in cmd prompt, not Cmder): mklink /D certs/gen path/to/symlink_dir
