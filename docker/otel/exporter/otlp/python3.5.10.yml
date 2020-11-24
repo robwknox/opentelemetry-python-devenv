@@ -6,11 +6,11 @@ services:
       dockerfile: python3.5.10.Dockerfile
     image: dev/otel/exporter/otlp:python3.5.10
     volumes:
-      - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-sdk/src/opentelemetry/:/opentelemetry-python/opentelemetry-sdk/src/opentelemetry/"
-      - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-api/src/opentelemetry/:/opentelemetry-python/opentelemetry-api/src/opentelemetry/"
-      - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/opentelemetry-proto/src/opentelemetry/:/opentelemetry-python/opentelemetry-proto/src/opentelemetry/"
-      - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/exporter/opentelemetry-exporter-otlp:/opentelemetry-python/exporter/opentelemetry-exporter-otlp"
-      - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/pyproject.toml:/opentelemetry-python/pyproject.toml"
-      - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/.flake8:/opentelemetry-python/.flake8"
-      - "//c/Users/robwk/PycharmProjects/openTelemetry/src/opentelemetry-python/.pylintrc:/opentelemetry-python/.pylintrc"
-      - "//c/Users/robwk/PycharmProjects/openTelemetry/main.py:/opentelemetry-python/main.py"
+      - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-sdk/src/opentelemetry/:/opentelemetry-python/opentelemetry-sdk/src/opentelemetry/"
+      - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-api/src/opentelemetry/:/opentelemetry-python/opentelemetry-api/src/opentelemetry/"
+      - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-proto/src/opentelemetry/:/opentelemetry-python/opentelemetry-proto/src/opentelemetry/"
+      - "//e/open-telemetry/src/opentelemetry-python/exporter/opentelemetry-exporter-otlp:/opentelemetry-python/exporter/opentelemetry-exporter-otlp"
+      - "//e/open-telemetry/src/opentelemetry-python/pyproject.toml:/opentelemetry-python/pyproject.toml"
+      - "//e/open-telemetry/src/opentelemetry-python/.flake8:/opentelemetry-python/.flake8"
+      - "//e/open-telemetry/src/opentelemetry-python/.pylintrc:/opentelemetry-python/.pylintrc"
+      - "//e/open-telemetry/main.py:/opentelemetry-python/main.py"

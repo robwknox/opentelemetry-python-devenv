@@ -61,9 +61,9 @@ git co 5c9e043d6921550d82668788e3758a733fb11cb8
 Host System - python
 -----------------------------------------
 
-cd ~/PycharmProjects/opentelemetry/
+cd <project root>
 python -m venv .venv/dev_reqs
-.venv/dev_reqs/Scripts/pip install -r ~/PycharmProjects/opentelemetry/local-dev-requirements.txt
+.venv/dev_reqs/Scripts/pip install -r local-dev-requirements.txt
 
 -----------------------------------------
 Docker images / docker compose
@@ -104,6 +104,6 @@ View:
 TLS cert generation
 -----------------------------------------
 
-docker run -it --rm -v "//c/Users/robwk/PycharmProjects/openTelemetry/docker/util/certs/gen:/root/gen" dev/util/cert-gen:latest
+docker run -it --rm -v "<project root>/docker/util/certs/gen:/root/gen" dev/util/cert-gen:latest
 
 Then use (in cmd prompt, not Cmder): mklink /D certs/gen path/to/symlink_dir

@@ -1,4 +1,4 @@
-FROM dev/otel/all/install:python3.9.0
+FROM dev/otel/all/install:python3.8.6
 
 RUN pip install -e opentelemetry-api/ \
  && pip install -e opentelemetry-sdk/ \

@@ -1,17 +1,19 @@
 from grpc import insecure_channel
 
 from opentelemetry import trace
-from opentelemetry.exporter.otlp import Protocol, Compression
-from opentelemetry.exporter.otlp.trace_exporter import OTLPSpanExporter
-from opentelemetry.exporter.otlp.sender.grpc import _load_credential_from_file
+from opentelemetry.exporter.otlp import Protocol, Compression, \
+    OTLPExporter, OTLPSpanExporter
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import (
     BatchExportSpanProcessor,
     SimpleExportSpanProcessor
 )
+from opentelemetry.exporter import otlp
 
 if __name__ == '__main__':
 
+    OTLPExporter(ExporterType.SPAN)
+    exit(0)
     # file = _load_credential_from_file("/root/service.pem")
     # a = 1
     # exit(0)
@@ -25,15 +27,16 @@ if __name__ == '__main__':
                 # insecure=True,
                 # compression=Compression.NONE,
                 # headers="rob=testing",
-                cert_file="/root/ca.crt"
+                cert_file="/root/service.pem"
             )
         )
         #
         # BatchExportSpanProcessor(
         #     OTLPSpanExporter(
         #         protocol=Protocol.HTTP_PROTOBUF,
-        #         endpoint="http://host.docker.internal:55681/v1/traces",
-        #         insecure=True,
+        #         endpoint="https://host.docker.internal:55681/v1/traces",
+        #         insecure=False,
+        #         cert_file="/root/ca.crt",
         #         compression=Compression.DEFLATE,
         #     )
         # )

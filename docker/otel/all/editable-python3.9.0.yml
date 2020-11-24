@@ -3,13 +3,13 @@ services:
   dev:
     build:
       context: .
-      dockerfile: python3.9.0.Dockerfile
-    image: dev/otel/exporter/otlp:python3.9.0
+      dockerfile: editable-python3.9.0.Dockerfile
+    image: dev/otel/all/editable:python3.9.0
     volumes:
-      - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-sdk/src/opentelemetry:/opentelemetry-python/opentelemetry-sdk/src/opentelemetry"
-      - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-api/src/opentelemetry:/opentelemetry-python/opentelemetry-api/src/opentelemetry"
-      - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-proto/src/opentelemetry:/opentelemetry-python/opentelemetry-proto/src/opentelemetry"
+      - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-sdk/src/opentelemetry/:/opentelemetry-python/opentelemetry-sdk/src/opentelemetry/"
+      - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-api/src/opentelemetry/:/opentelemetry-python/opentelemetry-api/src/opentelemetry/"
       - "//e/open-telemetry/src/opentelemetry-python/exporter/opentelemetry-exporter-otlp/src/opentelemetry:/opentelemetry-python/exporter/opentelemetry-exporter-otlp/src/opentelemetry"
+      - "//e/open-telemetry/src/opentelemetry-python/exporter/opentelemetry-exporter-zipkin/src/opentelemetry:/opentelemetry-python/exporter/opentelemetry-exporter-zipkin/src/opentelemetry"
       - "//e/open-telemetry/src/opentelemetry-python/pyproject.toml:/opentelemetry-python/pyproject.toml"
       - "//e/open-telemetry/src/opentelemetry-python/.flake8:/opentelemetry-python/.flake8"
       - "//e/open-telemetry/src/opentelemetry-python/.pylintrc:/opentelemetry-python/.pylintrc"

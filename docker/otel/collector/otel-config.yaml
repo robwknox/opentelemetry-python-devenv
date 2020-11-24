@@ -9,6 +9,9 @@ receivers:
   otlp:
     protocols:
       http:
+        tls_settings:
+          cert_file: /root/service.pem
+          key_file: /root/service.key
       grpc:
         tls_settings:
           cert_file: /root/service.pem
@@ -34,6 +37,12 @@ exporters:
     logLevel: debug
   zipkin:
     endpoint: "http://host.docker.internal:9411/api/v2/spans"
+  jaeger:
+    endpoint: host.docker.internal:14250
+    insecure: true
+  prometheus:
+    endpoint: 0.0.0.0:9464
+    namespace: test-space
 
 service:
 
@@ -42,11 +51,11 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, zipkin]
+      exporters: [logging, jaeger]
 
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging]
+      exporters: [logging, prometheus]
 
   extensions: [health_check, pprof, zpages]

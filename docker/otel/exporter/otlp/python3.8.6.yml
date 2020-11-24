@@ -3,8 +3,8 @@ services:
   dev:
     build:
       context: .
-      dockerfile: python3.9.0.Dockerfile
-    image: dev/otel/exporter/otlp:python3.9.0
+      dockerfile: python3.8.6.Dockerfile
+    image: dev/otel/exporter/otlp:python3.8.6
     volumes:
       - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-sdk/src/opentelemetry:/opentelemetry-python/opentelemetry-sdk/src/opentelemetry"
       - "//e/open-telemetry/src/opentelemetry-python/opentelemetry-api/src/opentelemetry:/opentelemetry-python/opentelemetry-api/src/opentelemetry"

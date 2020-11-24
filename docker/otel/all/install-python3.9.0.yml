@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: install-python3.9.0.Dockerfile
+    image: docker/otel/all/install:python3.9.0
+    volumes:
+      - "//e/open-telemetry/src/opentelemetry-python/pyproject.toml:/opentelemetry-python/pyproject.toml"
+      - "//e/open-telemetry/src/opentelemetry-python/.flake8:/opentelemetry-python/.flake8"
+      - "//e/open-telemetry/src/opentelemetry-python/.pylintrc:/opentelemetry-python/.pylintrc"
+      - "//e/open-telemetry/main.py:/opentelemetry-python/main.py"

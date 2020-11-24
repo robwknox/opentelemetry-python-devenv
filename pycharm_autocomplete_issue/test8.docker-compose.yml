@@ -1,7 +1,0 @@
-version: "3.8"
-services:
-  dev:
-    build:
-      context: .
-      dockerfile: test8.Dockerfile
-    image: autocomplete-issue:test8
